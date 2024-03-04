@@ -2,8 +2,9 @@
 
 pragma solidity >=0.8.2 <0.9.0;
 
+/**
 
-contract FixedDepositBox01 {
+contract FixedDepositBox {
     address owner;
     uint256 initialInvestment;
     uint256 duration; // in seconds
