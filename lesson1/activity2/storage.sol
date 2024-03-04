@@ -82,3 +82,62 @@ contract Storage {
     }
 
 }
+Contract Storage LarsWay {
+    uint256 unlockTime;
+    uint256 number;
+    uint8[10] dataArray;
+
+    // Task 1: Change the constructor function to take in a parameter of type uint256 called duration
+    // Assign the state variable unlockTime to be the addition of currentTime and duration
+    constructor(uint256 duration) {
+        uint256 currentTime = block.timestamp; // The current time when the smart contract is deployed
+        unlockTime = currentTime + duration;
+        
+        uint8 i = 1;
+        while(i < 11) {
+            dataArray[i-1] = i;
+            i++;
+        }
+    }
+
+    /**
+     * @dev Store value in variable
+     * @param num value to store
+     */
+    function store(uint256 num) public {
+        number = num;
+    }
+
+    /**
+     * @dev Return value
+     * @return value of 'number' if timeNow is greater than unlockTime, otherwise returns 0
+     */
+    function retrieve() public view returns (uint256){
+        uint256 timeNow = block.timestamp; // The current time when the retrieve function is called
+
+        // Task 2: Use a control flow to change the amount code so that it will only return
+        // the state variable number if the timeNow is greater than the unlockTime
+        // if not the function should return 0
+        if (timeNow > unlockTime) {
+            return number;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @dev Gets the sum of the data array based on the input into the function
+     * @param n how many numbers you would like to add up
+     * @return sum of the n number of items in the data array
+     */
+    function getSum(uint256 n) public view returns (uint8){
+        require(n <= 10, "Input should be less than or equal to 10");
+        
+        uint8 sum = 0;
+        // Task 3: Use a control flow to add up the contents of the dataArray from index 0 to index n
+        for (uint8 i = 0; i < n; i++) {
+            sum += dataArray[i];
+        }
+        return sum;
+    }
+}
