@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0;
+pragma solidity 0.8.24;
 
 import "./IERC20.sol"; // Assuming you have an ERC20 interface
 
